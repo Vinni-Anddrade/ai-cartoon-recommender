@@ -26,8 +26,8 @@ class VectorStoreBuilder:
     def build_documents(self):
         self.documents = list()
         for row in self.df.iterrows():
-            id = row.index
-            page_content = row["chunk"]
+            id = row[0]
+            page_content = row[1]["chunks"]
 
             doc = Document(
                 page_content=page_content, metadata={"source": "df", "id": id}
@@ -40,6 +40,7 @@ class VectorStoreBuilder:
         self.texts_splitted = splitter.split_documents(self.documents)
 
     def embedding_texts(self):
+        breakpoint()
         vector_store = Chroma.from_documents(
             self.texts_splitted,
             embedding=self.embedding,
