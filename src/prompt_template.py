@@ -1,4 +1,4 @@
-from langchain.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate
 
 
 def cartoon_prompt():
@@ -25,7 +25,7 @@ def cartoon_prompt():
     Your well-structured response:
     """
 
-    template = PromptTemplate.from_template(
+    template = PromptTemplate(
         template=prompt, input_variables=["context", "question"]
     )
 

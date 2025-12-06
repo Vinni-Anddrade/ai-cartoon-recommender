@@ -20,7 +20,6 @@ def main():
         processed_csv_path = loader.loading_and_processing()
         logger.info("The data was loaded and processed")
 
-        breakpoint()
         _ = VectorStoreBuilder(processed_csv_path).load_vector_store()
         logger.info("Vector Store built sucessfully")
 

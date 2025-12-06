@@ -3,7 +3,7 @@ from langchain_community.vectorstores import Chroma
 from langchain.docstore.document import Document
 from langchain_huggingface import HuggingFaceEmbeddings
 from dotenv import load_dotenv
-from src import Configuration
+from src.configuration import Configuration
 import pandas as pd
 
 
@@ -17,6 +17,7 @@ class VectorStoreBuilder:
 
         config = Configuration()
         self.embedding = HuggingFaceEmbeddings(model_name=config.embedding_model_name)
+
         self.df = pd.read_csv(self.data_path, encoding="utf-8")
 
         self.build_documents()
@@ -40,7 +41,6 @@ class VectorStoreBuilder:
         self.texts_splitted = splitter.split_documents(self.documents)
 
     def embedding_texts(self):
-        breakpoint()
         vector_store = Chroma.from_documents(
             self.texts_splitted,
             embedding=self.embedding,
