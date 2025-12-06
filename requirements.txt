@@ -6,3 +6,4 @@ langchain-huggingface==1.1.0
 streamlit==1.51.0
 pandas==2.3.3
 sentence-transformers==5.1.2
+chromadb
