@@ -15,14 +15,14 @@ spec:
         app: llmops
     spec:
       containers:
-        - name: llmops-container
-          image: llmops-app:latest
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8501
-          envFrom:
-            - secretRef:
-                name: llmops-secrets
+      - name: llmops-container
+        image: llmops-app:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8501
+        envFrom:
+        - secretRef:
+            name: llmops-secrets
 ---
 apiVersion: v1
 kind: Service
@@ -33,6 +33,6 @@ spec:
   selector:
     app: llmops
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8501
+  - protocol: TCP
+    port: 80
+    targetPort: 8501
