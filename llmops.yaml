@@ -24,6 +24,7 @@ spec:
         - secretRef:
             name: llmops-secrets
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
