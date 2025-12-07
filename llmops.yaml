@@ -15,7 +15,7 @@ spec:
         app: llmops
     spec:
       containers:
-      - name: llmops-containers
+      - name: llmops-container
         image: llmops-app:latest
         imagePullPolicy: IfNotPresent
         ports:
@@ -23,7 +23,7 @@ spec:
         envFrom:
           - secretRef:
             name: llmops-secrets
-
+---
 
 apiVersion: v1
 kind: Service
