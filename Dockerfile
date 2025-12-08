@@ -1,19 +1,28 @@
-FROM python:3.10-slim
+# Imagem base oficial e leve do Python
+FROM python:3.12-slim
 
-ENV PYTHONDONTWRITEBYTECODE=1  \
-    PYTHONUNBUFFERED=1
+# Impedir buffering no log (importante para Cloud Run)
+ENV PYTHONUNBUFFERED=1
 
+# Diretório de trabalho dentro do container
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
+# Instalar dependências do sistema (somente o essencial)
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
-    curl \
     && rm -rf /var/lib/apt/lists/*
 
+# Copiar dependências primeiro (melhora cache do Docker)
+COPY requirements.txt .
+
+# Instalar dependências Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar o restante dos arquivos da aplicação
 COPY . .
 
-RUN pip install --no-cache-dir -e .
+# Expor porta padrão usada pelo Cloud Run
+EXPOSE 8080
 
-EXPOSE 8501
-
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0", "--server.headless=true"]
+# Streamlit precisa rodar no host 0.0.0.0 e na porta definida por $PORT
+CMD ["streamlit", "run", "app.py", "--server.port=$PORT", "--server.address=0.0.0.0"]
