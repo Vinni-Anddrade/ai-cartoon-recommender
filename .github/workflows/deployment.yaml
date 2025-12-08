@@ -7,7 +7,7 @@ on:
 env:
   REGION: us-central1
   SERVICE_NAME: streamlit-app
-  REPOSITORY: meu-repo
+  REPOSITORY: ai-cartoon-recommender
 
 jobs:
   deploy:
