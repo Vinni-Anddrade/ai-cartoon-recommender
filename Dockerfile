@@ -25,4 +25,4 @@ COPY . .
 EXPOSE 8080
 
 # Streamlit precisa rodar no host 0.0.0.0 e na porta definida por $PORT
-CMD ["streamlit", "run", "app.py", "--server.port=$PORT", "--server.address=0.0.0.0"]
+CMD ["sh", "-c", "streamlit run app.py --server.address=0.0.0.0 --server.port=$PORT"]
