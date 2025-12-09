@@ -1,6 +1,6 @@
 from langchain_text_splitters import CharacterTextSplitter
 from langchain_community.vectorstores import Chroma
-from langchain.docstore.document import Document
+from langchain_core.documents import Document
 from langchain_huggingface import HuggingFaceEmbeddings
 from dotenv import load_dotenv
 from src.configuration import Configuration
