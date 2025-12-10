@@ -8,6 +8,7 @@ env:
   REGION: us-central1
   SERVICE_NAME: streamlit-app
   REPOSITORY: ai-cartoon-recommender
+  IMAGE_URI: ${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE_NAME }}:latest
 
 jobs:
   deploy:
@@ -28,11 +29,11 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t ${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE_NAME }}:latest .
+          docker build -t ${{ env.IMAGE_URI }} .
 
       - name: Push Docker Image
         run: |
-          docker push ${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE_NAME }}:latest
+          docker push ${{ env.IMAGE_URI }}
 
       - name: Deploy to Cloud Run
         run: |
